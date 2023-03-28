@@ -1,0 +1,24 @@
+DROP TABLE IF EXISTS "user";
+DROP TABLE IF EXISTS "order";
+DROP TABLE IF EXISTS article;
+
+CREATE TABLE "user" (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    username VARCHAR(256) NOT NULL,
+    password VARCHAR(256) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE article (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    name VARCHAR(256) NOT NULL,
+    description VARCHAR(256) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE "order" (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    orderid VARCHAR(256) NOT NULL,
+    description VARCHAR(256) NOT NULL,
+    PRIMARY KEY (id)
+);
