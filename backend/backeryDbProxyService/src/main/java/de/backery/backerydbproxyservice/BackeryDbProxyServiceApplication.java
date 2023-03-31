@@ -1,4 +1,4 @@
-package de.backery.backeryDbProxyService;
+package de.backery.backerydbproxyservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

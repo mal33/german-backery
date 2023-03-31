@@ -1,0 +1,89 @@
+openapi: 3.0.0
+info:
+  title: Article API
+  version: 1.0.0
+  description: Article API for german backery
+servers:
+  - url: http://localhost:8080/api/v1
+paths:
+  /articles:
+    get:
+      summary: Get all articles
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Article'
+    post:
+      summary: Create a new article
+      requestBody:
+        description: Article object to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Article'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+  /articles/{articleId}:
+    parameters:
+      - name: articleId
+        in: path
+        description: ID of the article to manipulate
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get an article by ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+    put:
+      summary: Update an article by ID
+      requestBody:
+        description: Article object to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Article'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+    delete:
+      summary: Delete an article by ID
+      responses:
+        '204':
+          description: No Content
+components:
+  schemas:
+    Article:
+      type: object
+      properties:
+        articleId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+      required:
+        - articleId
+        - name
+        - description
