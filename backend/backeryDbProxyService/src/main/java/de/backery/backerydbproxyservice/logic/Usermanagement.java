@@ -6,5 +6,9 @@ import java.util.List;
 
 public interface Usermanagement {
 
-    List<UserTo> getAllUser();
+    List<UserTo> getAllUsers();
+    UserTo createNewUser(UserTo userTo);
+    UserTo getUserById(String userId);
+    UserTo updateUser(UserTo reqUserTo);
+    UserTo deleteUser(String userId);
 }

@@ -3,7 +3,6 @@ package de.backery.backerydbproxyservice.logic;
 import de.backery.backerydbproxyservice.to.ArticleTo;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface Articlemanagement {
 

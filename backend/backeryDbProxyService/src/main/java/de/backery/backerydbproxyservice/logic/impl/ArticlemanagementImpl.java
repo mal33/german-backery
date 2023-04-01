@@ -24,20 +24,23 @@ public class ArticlemanagementImpl implements Articlemanagement {
     @Override
     public List<ArticleTo> getAllArticles() {
         List<ArticleEntity> allArticleEntity = articleRepository.findAll();
-        return customMapper.userEntityListToUserToList(allArticleEntity);
+        log.info("Found {} articles", allArticleEntity.size());
+        return customMapper.articleEntityListToArticleToList(allArticleEntity);
     }
 
     @Override
     public ArticleTo createNewArticle(ArticleTo articleTo) {
         ArticleEntity convertedArticle = customMapper.articleToToArticleEntity(articleTo);
         convertedArticle.setArticleId(UUID.randomUUID().toString());
-        ArticleEntity savedArticle = articleRepository.saveAndFlush(convertedArticle);
+        ArticleEntity savedArticle = articleRepository.save(convertedArticle);
+        log.info("The article with id {} has been created", savedArticle.getArticleId());
         return customMapper.articleEntityToArticleTo(savedArticle);
     }
 
     @Override
     public ArticleTo getArticleByArticleId(String articleId) {
         ArticleEntity foundArticleEntity = articleRepository.findByArticleId(articleId);
+        log.info("Found article with id {}", foundArticleEntity.getArticleId());
         return customMapper.articleEntityToArticleTo(foundArticleEntity);
     }
 
@@ -55,6 +58,7 @@ public class ArticlemanagementImpl implements Articlemanagement {
                     .description(reqArticleTo.getDescription())
                     .build()
             );
+            log.info("Article with id {} has been updated", changedEntity.getArticleId());
             return customMapper.articleEntityToArticleTo(changedEntity);
         }
         return null;
@@ -66,6 +70,7 @@ public class ArticlemanagementImpl implements Articlemanagement {
                 articleRepository.findByArticleId(articleId);
         if (toBeDeletedArticle != null) {
             articleRepository.delete(toBeDeletedArticle);
+            log.info("Article with id {} has been deleted", toBeDeletedArticle.getArticleId());
             return customMapper.articleEntityToArticleTo(toBeDeletedArticle);
         }
         return null;

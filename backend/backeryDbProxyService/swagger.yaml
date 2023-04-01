@@ -1,13 +1,15 @@
 openapi: 3.0.0
 info:
-  title: Article API
+  title: BackeryDbProxyService API
   version: 1.0.0
-  description: Article API for german backery
+  description: API for german backery to interact with all databases
 servers:
   - url: http://localhost:8080/api/v1
 paths:
   /articles:
     get:
+      tags:
+        - Article
       summary: Get all articles
       responses:
         '200':
@@ -19,6 +21,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/Article'
     post:
+      tags:
+        - Article
       summary: Create a new article
       requestBody:
         description: Article object to be created
@@ -41,8 +45,10 @@ paths:
         description: ID of the article to manipulate
         required: true
         schema:
-          type: integer
+          type: string
     get:
+      tags:
+        - Article
       summary: Get an article by ID
       responses:
         '200':
@@ -52,6 +58,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Article'
     put:
+      tags:
+        - Article
       summary: Update an article by ID
       requestBody:
         description: Article object to be updated
@@ -68,7 +76,194 @@ paths:
               schema:
                 $ref: '#/components/schemas/Article'
     delete:
+      tags:
+        - Article
       summary: Delete an article by ID
+      responses:
+        '204':
+          description: No Content
+
+  /orders:
+    get:
+      tags:
+        - Order
+      summary: Get all orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+    post:
+      tags:
+        - Order
+      summary: Create a new order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /orders/{orderId}:
+    get:
+      tags:
+        - Order
+      summary: Get an order by ID
+      parameters:
+        - in: path
+          name: orderId
+          schema:
+            type: string
+          required: true
+          description: ID of the order to retrieve
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - Order
+      summary: Update an order by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      parameters:
+        - in: path
+          name: orderId
+          schema:
+            type: string
+          required: true
+          description: ID of the order to update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - Order
+      summary: Delete an order by ID
+      parameters:
+        - in: path
+          name: orderId
+          schema:
+            type: string
+          required: true
+          description: ID of the order to delete
+      responses:
+        '204':
+          description: No Content
+  /users:
+    get:
+      tags:
+        - User
+      summary: Get all users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      tags:
+        - User
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users/{userId}:
+    get:
+      tags:
+        - User
+      summary: Get a user by ID
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+          description: ID of the user to retrieve
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - User
+      summary: Update a user by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+          description: ID of the user to update
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - User
+      summary: Delete a user by ID
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+          description: ID of the user to delete
       responses:
         '204':
           description: No Content
@@ -87,3 +282,27 @@ components:
         - articleId
         - name
         - description
+    Order:
+      type: object
+      properties:
+        orderId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+      required:
+        - orderId
+    User:
+      type: object
+      properties:
+        userId:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+      required:
+        - userId
+        - username
+        - password

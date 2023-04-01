@@ -1,4 +1,4 @@
-package de.backery.backerydbproxyservice.articlemanagement;
+package de.backery.backerydbproxyservice.impl;
 
 import de.backery.backerydbproxyservice.common.CommonTestBase;
 import de.backery.backerydbproxyservice.to.ArticleTo;

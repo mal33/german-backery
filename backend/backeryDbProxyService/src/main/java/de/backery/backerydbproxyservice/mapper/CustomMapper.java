@@ -41,5 +41,11 @@ public interface CustomMapper {
     UserEntity userToToUserEntity(UserTo to);
 
     @InheritInverseConfiguration
-    List<ArticleTo> userEntityListToUserToList(List<ArticleEntity> articleEntityList);
+    List<ArticleTo> articleEntityListToArticleToList(List<ArticleEntity> articleEntityList);
+
+    @InheritInverseConfiguration
+    List<OrderTo> orderEntityListToOrderToList(List<OrderEntity> orderEntityList);
+
+    @InheritInverseConfiguration
+    List<UserTo> userEntityListToUserToList(List<UserEntity> userEntityList);
 }

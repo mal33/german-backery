@@ -17,4 +17,6 @@ INSERT INTO articles (id, articleid, name, description) VALUES
     (default, '24c3145d-03bc-4f84-8942-3fef86ab0d09','Vollkornbrot', 'This hearty German bread is made with whole grain flour and is packed with fiber and nutrients. It has a dense texture and a nutty flavor that pairs well with a variety of toppings like butter, cheese, and jam.');
 
 INSERT INTO orders (id, orderid, description) VALUES
-(default, '218d1acf-2bdd-4b91-9380-d212d568c432', '50x Brötchen');
+(default, '218d1acf-2bdd-4b91-9380-d212d568c432', '50x Rye Bread');
+INSERT INTO orders (id, orderid, description) VALUES
+(default, '033b3d4c-bc58-4f16-b669-703fd12701d5', '1337x Pretzel Bread');
