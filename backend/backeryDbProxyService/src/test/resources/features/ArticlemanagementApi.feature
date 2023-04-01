@@ -7,7 +7,7 @@ Feature: other API should be able to use CRUD operations with the articles
   Scenario: a service wants to fetch a specific article
     Given a valid article id "8f633d1d-08c8-41ad-9a9d-ba5cd0210319"
     When a GET request will be made with an specific article id
-    Then it should return 1 article with the id "8f633d1d-08c8-41ad-9a9d-ba5cd0210319"
+    Then it should return an article with the id "8f633d1d-08c8-41ad-9a9d-ba5cd0210319"
 
   Scenario: a service wants to create a article
     Given a bread name "Peter's bread" with the description "There is no description yet"

@@ -22,6 +22,7 @@ public class ArticlemanagementApi extends CommonTestBase {
     private String validArticleId;
     private List<ArticleTo> allArticles = new ArrayList<>();
     private ArticleTo mockArticle;
+    private ArticleTo resultArticle;
 
     @When("a GET request will be made against the endpoint to grab all articles")
     public void aGETRequestWillBeMadeAgainstTheEndpointToGrabAllArticles() {
@@ -50,12 +51,12 @@ public class ArticlemanagementApi extends CommonTestBase {
                 .path("/articles/")
                 .pathSegment(validArticleId)
                 .toUriString();
-        mockArticle = restTemplate.getForEntity(url, ArticleTo.class).getBody();
+        resultArticle = restTemplate.getForEntity(url, ArticleTo.class).getBody();
     }
 
-    @Then("it should return {int} article with the id {string}")
-    public void itShouldReturnArticleWithTheId(int expectedNumberOfArticle, String articleId) {
-        assertThat(mockArticle.getArticleId(), equalTo(articleId));
+    @Then("it should return an article with the id {string}")
+    public void itShouldReturnAnArticleWithTheId(String articleId) {
+        assertThat(resultArticle.getArticleId(), equalTo(articleId));
     }
 
 
@@ -72,9 +73,9 @@ public class ArticlemanagementApi extends CommonTestBase {
     public void aPOSTRequestWillBeMadeInOrderToCreateANewArticle() {
         String url = UriComponentsBuilder
                 .fromHttpUrl(getUrl())
-                .pathSegment("articles")
+                .path("articles")
                 .toUriString();
-        mockArticle = restTemplate.postForObject(url, mockArticle, ArticleTo.class);
+        resultArticle = restTemplate.postForObject(url, mockArticle, ArticleTo.class);
     }
 
     @Then("it should the new article with the name {string} with the description {string}")
@@ -84,7 +85,17 @@ public class ArticlemanagementApi extends CommonTestBase {
     }
 
     @When("a PUT request will be made with an specific article id and providing a new name {string}")
-    public void aPUTRequestWillBeMadeWithAnSpecificArticleIdAndProvidingANewName(String arg0) {
+    public void aPUTRequestWillBeMadeWithAnSpecificArticleIdAndProvidingANewName(String newNameForArticle) {
+        String url = UriComponentsBuilder
+                .fromHttpUrl(getUrl())
+                .path("articles")
+                .pathSegment(validArticleId)
+                .toUriString();
+        mockArticle = ArticleTo
+                .builder()
+                .name(newNameForArticle)
+                .build();
+        restTemplate.put(url, mockArticle);
     }
 
     @Then("the existing article with the id {string} should appear with updated information")
@@ -97,6 +108,12 @@ public class ArticlemanagementApi extends CommonTestBase {
 
     @When("a DELETE request will be made with an specific article id")
     public void aDELETERequestWillBeMadeWithAnSpecificArticleId() {
+        String url = UriComponentsBuilder
+                .fromHttpUrl(getUrl())
+                .path("articles")
+                .pathSegment(validArticleId)
+                .toUriString();
+        restTemplate.delete(url);
     }
 
     @Then("requesting article with id {string} should return an HTTP {int} error")
