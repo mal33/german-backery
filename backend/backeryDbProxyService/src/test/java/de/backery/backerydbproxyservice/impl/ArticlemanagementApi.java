@@ -41,7 +41,6 @@ public class ArticlemanagementApi extends CommonTestBase {
     @Given("a valid article id {string}")
     public void aValidArticleId(String someArticleId) {
         validArticleId = someArticleId;
-
     }
 
     @When("a GET request will be made with an specific article id")
