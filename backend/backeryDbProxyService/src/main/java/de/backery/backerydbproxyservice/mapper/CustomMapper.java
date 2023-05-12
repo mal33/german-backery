@@ -4,7 +4,11 @@ import de.backery.backerydbproxyservice.dataaccess.entity.*;
 import de.backery.backerydbproxyservice.to.ArticleTo;
 import de.backery.backerydbproxyservice.to.OrderTo;
 import de.backery.backerydbproxyservice.to.UserTo;
-import org.mapstruct.*;
+import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+
 
 import java.util.List;
 

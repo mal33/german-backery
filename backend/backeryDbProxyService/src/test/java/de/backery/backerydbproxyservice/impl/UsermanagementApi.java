@@ -1,7 +1,6 @@
 package de.backery.backerydbproxyservice.impl;
 
 import de.backery.backerydbproxyservice.common.CommonTestBase;
-import de.backery.backerydbproxyservice.to.ArticleTo;
 import de.backery.backerydbproxyservice.to.UserTo;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

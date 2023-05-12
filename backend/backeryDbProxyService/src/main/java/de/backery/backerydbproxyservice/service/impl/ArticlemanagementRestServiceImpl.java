@@ -32,7 +32,9 @@ public class ArticlemanagementRestServiceImpl implements ArticlemanagementRestSe
 
     @Override
     public ResponseEntity<ArticleTo> getArticleById(String articleId) {
-        ArticleTo foundArticle = articlemanagement.getArticleByArticleId(articleId);
+        ArticleTo foundArticle = articlemanagement
+                .getArticleByArticleId(articleId)
+                .orElse(null);
         return generateArticleToResponse(foundArticle);
     }
 

@@ -38,10 +38,15 @@ public class ArticlemanagementImpl implements Articlemanagement {
     }
 
     @Override
-    public ArticleTo getArticleByArticleId(String articleId) {
-        ArticleEntity foundArticleEntity = articleRepository.findByArticleId(articleId);
-        log.info("Found article with id {}", foundArticleEntity.getArticleId());
-        return customMapper.articleEntityToArticleTo(foundArticleEntity);
+    public Optional<ArticleTo> getArticleByArticleId(String articleId) {
+        ArticleEntity foundArticleEntity;
+        Optional<ArticleEntity> optionalArticleEntity = Optional.of(articleRepository.findByArticleId(articleId));
+        if (optionalArticleEntity.isPresent()) {
+            foundArticleEntity = optionalArticleEntity.get();
+            log.info("Found article with id {}", foundArticleEntity.getArticleId());
+            return Optional.of(customMapper.articleEntityToArticleTo(foundArticleEntity));
+        }
+        return Optional.empty();
     }
 
     @Override
